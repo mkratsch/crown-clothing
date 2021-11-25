@@ -44,7 +44,7 @@ export const signInWithGoogle = () => {
 		// The AuthCredential type that was used
 		const credential = GoogleAuthProvider.credentialFromError(error);
 		// Do whatever to handle error
-		console.log({
+		console.error({
 			errorCode,
 			errorMessage,
 			email,
@@ -57,7 +57,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 	if (!userAuth) return;
 
 	const userRef = doc(firestore, `users/${userAuth.uid}`);
-	console.log(userRef);
+
 	const userSnapshot = await getDoc(userRef);
 
 	// `.exists` is now a function on the snapshot, not a property
@@ -75,7 +75,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 				...additionalData,
 			});
 		} catch (error) {
-			console.log('error creating user', error.message);
+			console.error('error creating user', error.message);
 		}
 	}
 
